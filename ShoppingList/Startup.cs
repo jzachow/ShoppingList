@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ShoppingList.Models;
+using ShoppingListDAL;
 
 namespace ShoppingList
 {
@@ -24,6 +27,10 @@ namespace ShoppingList
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<InventoryContext>(options
+                => options.UseSqlServer("Server=localhost;Database=Inventory;Trusted_Connection=true"));
+            services.AddSingleton<ShoppingCartModel>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
