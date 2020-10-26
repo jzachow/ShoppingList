@@ -30,8 +30,9 @@ namespace ShoppingList.Controllers
 
         public IActionResult AddToCart(int productID)
         {
-            Products newProduct = (Products)_context.Products.First(_ => _.Id == productID);
+            Products newProduct = _context.Products.First(_ => _.Id == productID);
             _shoppingCart.Cart.Add(newProduct);
+            _shoppingCart.Total += newProduct.Price;
 
             return View("ShoppingCart", _shoppingCart);
         }

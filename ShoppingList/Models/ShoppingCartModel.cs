@@ -9,5 +9,7 @@ namespace ShoppingList.Models
     public class ShoppingCartModel
     {
         public List<Products> Cart { get; set; } = new List<Products>();
+
+        public decimal Total { get; set; }
     }
 }
