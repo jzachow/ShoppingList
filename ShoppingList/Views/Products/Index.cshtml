@@ -4,11 +4,17 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Games</h1>
+<h1 class="text-center">Games</h1>
 <div class="container">
     @for (int i = 0; i < Model.Count(); i++)
     {
-        <div class="w-25 m-3 d-inline-block">
+        var current = i;
+
+        if(current % 3 == 0)
+        {
+            @:<div class="row justify-content-between">
+        }
+        <div class="m-3 col-3">
             <div class="card text-center">
                 <h5 class="card-title">@Model.ElementAt(i).Name</h5>
                 <p class="card-text">@Model.ElementAt(i).Price</p>
@@ -17,36 +23,12 @@
             htmlAttributes: new { @class = "btn btn-primary" })
             </div>
         </div>
+        if ((current - 2) % 3 == 0)
+        {
+           @:</div>
+        }
     }
 </div>
 
 
 
-@*<table class="table">
-        <thead>
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Price)
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        @item.Name
-                    </td>
-                    <td>
-                        @item.Price.ToString("c")
-                    </td>
-                    <td>
-                        @Html.ActionLink("Add to Cart", "AddToCart", "Products", routeValues: new { productId = item.Id }, htmlAttributes: new { @class = "btn btn-primary" })
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>*@

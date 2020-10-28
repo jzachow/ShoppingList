@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ShoppingList.Models;
+using ShoppingList.Services;
 using ShoppingListDAL;
 using ShoppingListDAL.Models;
 
@@ -13,9 +14,9 @@ namespace ShoppingList.Controllers
     public class ProductsController : Controller
     {
         private readonly InventoryContext _context;
-        private ShoppingCartModel _shoppingCart;
+        private IShoppingCartModel _shoppingCart;
 
-        public ProductsController(InventoryContext context, ShoppingCartModel shoppingCart)
+        public ProductsController(InventoryContext context, IShoppingCartModel shoppingCart)
         {
             _context = context;
             _shoppingCart = shoppingCart;            
@@ -35,6 +36,13 @@ namespace ShoppingList.Controllers
             _shoppingCart.Total += newProduct.Price;
 
             return View("ShoppingCart", _shoppingCart);
+        }
+
+        public IActionResult Checkout(ICheckoutService checkoutService)
+        {
+            var checkoutModel = checkoutService.ConvertCartToCheckout(_shoppingCart);
+
+            return View(checkoutModel);
         }
 
     }

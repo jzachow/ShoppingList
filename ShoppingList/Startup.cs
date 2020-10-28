@@ -29,7 +29,7 @@ namespace ShoppingList
             services.AddControllersWithViews();
             services.AddDbContext<InventoryContext>(options
                 => options.UseSqlServer("Server=localhost;Database=Inventory;Trusted_Connection=true"));
-            services.AddSingleton<ShoppingCartModel>();
+            services.AddSingleton<IShoppingCartModel, ShoppingCartModel>();
 
         }
 

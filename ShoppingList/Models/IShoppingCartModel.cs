@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ShoppingList.Models
 {
-    public class ShoppingCartModel : IShoppingCartModel
+    public interface IShoppingCartModel
     {
-        public List<Products> Cart { get; set; } = new List<Products>();
+        public List<Products> Cart { get; set; }
 
         public decimal Total { get; set; }
     }
